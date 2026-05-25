@@ -1,0 +1,46 @@
+# ===================================================================
+# ============= Single Run Configuration =============================
+# ===================================================================
+modelname: 'HeteroGNN_Single_Run'
+num_epochs: 50
+split_proportion: 0.75
+seed: 5154
+optimizer: adam
+
+# --- Fixed hyperparameters ---
+# --- Model architecture ---
+hidden_channels: 32
+num_layers: 1
+num_heads: 2
+
+# --- Training and regularization ---
+learning_rate: 0.001
+dropout: 0.25
+dropout_att: 0.1
+batch_size: 32
+
+# --- Composite loss weight ---
+lambda_weight: 0.3
+
+# --- Input sequence length ---
+seq_length: 6
+
+# ===================================================================
+# =================== Data and Environment Config ====================
+# ===================================================================
+# --- Node metadata ---
+node_info_file: './node_info.json'
+
+# --- High-frequency features (standardized HDF5) ---
+hdf5_file_vol_std: './processed_data1001/vol_covol_standardized.h5'
+hdf5_file_volvol_std: './processed_data1001/volvol_covolvol_standardized.h5'
+
+# --- Low-frequency features (daily CSV) ---
+stock_har_rv_folder: './day/standardized_stock_har'
+energy_har_rv_folder: './day/standardized_energy_har'
+stock_energy_corr_folder: './day/daycorr_stock_energy'
+energy_energy_corr_folder: './day/daycorr_energy_energy'
+
+# --- Other settings ---
+random_sampler: False
+intraday_points: 3

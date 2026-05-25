@@ -1,0 +1,66 @@
+prediction_sources:
+  mode: auto_from_folder
+  low_frequency_folder: results_low_with_energy
+  workbook_glob: "*.xlsx"
+  include_models:
+    - GATHAR
+    - HAR
+    - LSTM
+    - XGBOOST
+  exclude_models: []
+
+data:
+  stock_har_folder: day/daily_stock_har
+  energy_har_folder: day/daily_energy_har
+  stock_energy_corr_folder: day/daycorr_stock_energy
+  stock_return_folder: economic_inputs/stock_returns
+  future_return_folder: economic_inputs/future_returns
+  stock_pivoted_price_folder: original_data/stock_pivoted
+  future_daily_price_folder: original_data/energy_daily_price
+  future_pivoted_price_folder: original_data/energy_pivoted
+  generated_return_output_dir: economic_inputs/generated_from_original
+
+evaluation:
+  dataset_labels:
+    - Test
+  prediction_value_type: variance
+  future_har_value_type: variance
+  variance_epsilon: 1.0e-10
+  prediction_tail_length: 128
+  match_atol: 1.0e-10
+  match_rtol: 1.0e-6
+
+pairing:
+  mode: manual
+  corr_mode: rolling_return
+  corr_window: 23
+  manual_map:
+    000807云铝股份: AL.SHF
+    000822山东海化: SA.CZC
+    000932华菱钢铁: I.DCE
+    002203海亮股份: CU.SHF
+    300750宁德时代: NI.SHF
+    600028中国石化: SC.INE
+    600031三一重工: I.DCE
+    600115东方航空: LU.INE
+    600309万华化学: SC.INE
+    600469风神股份: RU.SHF
+    600660福耀玻璃: I.DCE
+    601058赛轮轮胎: RU.SHF
+    601118海南橡胶: RU.SHF
+    601600中国铝业: AL.SHF
+    601636旗滨集团: FG.CZC
+    601857中国石油: SC.INE
+    601865福莱特: FG.CZC
+    601899紫金矿业: CU.SHF
+    601919中远海控: LU.INE
+    603799华友钴业: NI.SHF
+
+hedging:
+  lag_steps: 1
+  beta_clip_min: -5.0
+  beta_clip_max: 5.0
+
+output:
+  output_dir: output/low_freq_hedging
+  write_alignment_detail: true

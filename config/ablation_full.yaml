@@ -1,0 +1,38 @@
+modelname: "GATHAR_ablation_full"
+num_epochs: 100
+seed: 5154
+train_proportion: 0.7
+validation_proportion: 0.1
+seq_length: 15
+intraday_points: 3
+batch_size: 128
+include_energy: true
+training_objective: "joint"
+lambda_weight: 0.789590466859
+learning_rate: 0.001048916707
+dropout: 0.082641803490
+optimizer: "adamw"
+activation: "tanh"
+loss_function: "mse"
+hidden_layout: [128, 64]
+num_heads: 5
+robustness_proportion: 0.7
+
+node_feature_flags:
+  har: true
+  self_volatility: true
+  covolatility: true
+  correlation: true
+
+edge_feature_flags:
+  covolatility: true
+  source_volatility: true
+  target_volatility: true
+
+node_info_file: "./node_info.json"
+hdf5_file_vol_std: "./processed_data1001/vol_covol_standardized.h5"
+hdf5_file_volvol_std: "./processed_data1001/volvol_covolvol_standardized.h5"
+stock_har_rv_folder: "./day/standardized_stock_har"
+energy_har_rv_folder: "./day/standardized_energy_har"
+stock_energy_corr_folder: "./day/daycorr_stock_energy"
+energy_energy_corr_folder: "./day/daycorr_energy_energy"

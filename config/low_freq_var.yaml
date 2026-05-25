@@ -1,0 +1,35 @@
+prediction_sources:
+  mode: auto_from_folder
+  low_frequency_folder: results_low_with_energy
+  workbook_glob: "*.xlsx"
+  include_models:
+    - GATHAR
+    - HAR
+    - LSTM
+    - XGBOOST
+  exclude_models: []
+
+data:
+  stock_har_folder: day/daily_stock_har
+  stock_pivoted_price_folder: original_data/stock_pivoted
+
+evaluation:
+  dataset_labels:
+    - Test
+  prediction_value_type: variance
+  variance_epsilon: 1.0e-12
+  prediction_tail_length: 128
+  match_atol: 1.0e-10
+  match_rtol: 1.0e-6
+  robustness_proportion: 1.0
+
+var:
+  confidence_levels:
+    - 0.05
+  mean_mode: zero
+  rolling_window: 22
+  min_history: 10
+
+output:
+  output_dir: output/low_freq_var
+  write_alignment_detail: true

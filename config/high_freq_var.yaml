@@ -1,0 +1,40 @@
+prediction_sources:
+  mode: auto_from_folder
+  high_frequency_folder: results_high_with_energy
+  workbook_glob: "*.xlsx"
+  include_models:
+    - GATHAR
+    - HAR
+    - LSTM
+    - XGBOOST
+  exclude_models: []
+
+data:
+  high_freq_stock_return_folder: economic_inputs/high_freq_stock_returns
+  stock_pivoted_price_folder: original_data/stock_pivoted
+  stock_har_folder: day/daily_stock_har
+  generated_return_output_dir: economic_inputs/generated_from_original
+
+evaluation:
+  dataset_labels:
+    - Test
+  prediction_value_type: variance
+  variance_epsilon: 1.0e-12
+  prediction_tail_length: 391
+  seq_length: 15
+  intraday_points: 3
+  train_proportion: 0.7
+  validation_proportion: 0.1
+  robustness_proportion: 1.0
+
+var:
+  confidence_levels:
+    - 0.05
+  mean_mode: rolling_mean
+  rolling_window: 50
+  min_history: 15
+  return_file_type: return
+
+output:
+  output_dir: output/high_freq_var
+  write_alignment_detail: true
